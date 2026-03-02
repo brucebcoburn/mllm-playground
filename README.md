@@ -17,13 +17,13 @@ mllm-playground/
 ├── shared_utils/           # Hardware-agnostic helper functions (e.g., data downloading)
 │   └── core_utils.py
 ├── CUDA/                   # Scripts & setups for standard PyTorch/CUDA environments
-│   ├── setup_mllm.sh
-│   └── qwen3_test.py
+│   ├── setup_mllm_CUDA.sh
+│   └── qwen3vl_test.py
 ├── Mac/                    # Scripts & setups for Apple Silicon using MLX
-│   ├── setup_mlx.sh
-│   └── qwen3_test_mlx.py
+│   ├── setup_mllm_MLX.sh
+│   └── qwen3vl_test_mlx.py
 ├── Slurm/                  # Batch scripts and setups for Supercomputer clusters
-│   └── run_qwen3.slurm
+│   └── run_qwen3vl.slurm
 └── test_images/            # Auto-generated directory for inference testing
 
 ## 🛠️ Future Development & File Structure Guide
