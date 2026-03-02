@@ -88,6 +88,7 @@ from configs.default_config import (
     PROMPT_TEXT,
     TEMPERATURE,
     DO_SAMPLE,
+    SEED_VAL,
 )
 
 if __name__ == "__main__":
@@ -98,7 +99,7 @@ if __name__ == "__main__":
         "--scheme", 
         type=str, 
         choices=["last_layer", "last_token", "mean_pooling", "all"],
-        default="last_layer",
+        default="all",
         help="Which hidden state representations to calculate and save."
     )
     args = parser.parse_args()
@@ -108,8 +109,8 @@ if __name__ == "__main__":
     # We attempt to set a manual seed for reproducibility sake. Because DO_SAMPLE is False,
     # this helps to suppress floating-point variations. Flash Attention 2 is notorious 
     # for NOT leading to 100% reproducible results, but we do what we can...
-    torch.manual_seed(42)
-    torch.cuda.manual_seed_all(42)
+    torch.manual_seed(SEED_VAL)
+    torch.cuda.manual_seed_all(SEED_VAL)
 
     # --- 1. DATA & FOLDER SETUP ---
     download_test_data()

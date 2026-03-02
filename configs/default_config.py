@@ -1,3 +1,6 @@
+# --- DEFAULT PARAMS ---
+SEED_VAL = 8008135
+
 # --- MODEL IDs ---
 QWEN3_VL_ID = "Qwen/Qwen3-VL-8B-Instruct"
 

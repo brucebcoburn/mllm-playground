@@ -24,6 +24,7 @@ from configs.default_config import (
     PROMPT_TEXT,
     TEMPERATURE,
     DO_SAMPLE,
+    SEED_VAL,
 )
 
 if __name__ == "__main__":
@@ -41,8 +42,8 @@ if __name__ == "__main__":
     # We attempt to set a manual seed for reproducibility sake. If DO_SAMPLE (later on) is False,
     # this help to suppress floating-point variations from Flash Attention. HOWEVER, Flash Attention 2
     # is notorious for NOT leading to reproducible results. Regardless, we do what we can...
-    torch.manual_seed(42)
-    torch.cuda.manual_seed_all(42)
+    torch.manual_seed(SEED_VAL)
+    torch.cuda.manual_seed_all(SEED_VAL)
 
     # --- 1. AUTOMATIC DATA DOWNLOAD & FOLDER SETUP ---
     download_test_data()
