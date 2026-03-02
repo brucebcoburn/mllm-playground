@@ -213,3 +213,7 @@ __marimo__/
 *.png
 *.jpg
 *.jpeg
+
+
+# PROJECT SPECIFIC
+results/
