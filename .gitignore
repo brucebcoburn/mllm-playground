@@ -208,3 +208,8 @@ __marimo__/
 
 # VsCode
 .vscode/
+
+# Images
+*.png
+*.jpg
+*.jpeg
