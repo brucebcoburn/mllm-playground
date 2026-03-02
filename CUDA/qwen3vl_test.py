@@ -109,6 +109,12 @@ if __name__ == "__main__":
                 }
             ]
 
+            # NOTE: Applying the Chat Template
+            # MLLMs are trained on highly specific text structures (e.g., <|im_start|>user... vs [INST]...).
+            # `apply_chat_template` takes our readable Python dictionary and automatically translates it 
+            # into the exact raw string format that the specific model expects
+            # `add_generation_prompt=True` appends the final "Assistant:" trigger token so the model 
+            # knows it is its turn to start generating text
             text = processor.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
             )
@@ -134,10 +140,10 @@ if __name__ == "__main__":
                 generated_ids = model.generate(
                     **inputs,
                     max_new_tokens=MAX_NEW_TOKENS,
-                    temperature=TEMPERATURE, # Our default is None (b/c do_sample=False)
-                    do_sample=DO_SAMPLE, # Our default is False (we want deterministic)
-                    top_p=None, # Overwriting Qwen's generation_config.json (otherwise warning 
-                    top_k=None, # due to our "deterministic settings")
+                    temperature=TEMPERATURE,  # Our default is None (b/c do_sample=False)
+                    do_sample=DO_SAMPLE,  # Our default is False (we want deterministic)
+                    top_p=None,  # Overwriting Qwen's generation_config.json (otherwise warning
+                    top_k=None,  # due to our "deterministic settings")
                 )
 
             # NOTE: We synchronize again to force Python to wait until the GPU
