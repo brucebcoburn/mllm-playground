@@ -2,37 +2,64 @@
 Hidden State Extraction Script for MLLMs
 
 This script runs sequential inference on a directory of images and extracts the 
-internal hidden states from the model during generation
+internal hidden states from the model during generation. 
 
 AVAILABLE EXTRACTION SCHEMES:
 
 1. --scheme mean_pooling (Smallest)
    * What it is: A single vector representing the mathematical average of the entire 
-     generated response at the final transformer layer
+     generated response at the final transformer layer. 
    * Shape: (1, hidden_dimension)
-   * Expected Size: ~8 KB per image
-   * Best For: Basic clustering, concept probing, or similarity checks between images
+   * Expected Size: ~8 KB per image.
+   * Best For: Basic clustering, concept probing, or similarity checks between images.
 
 2. --scheme last_token (Very Small)
    * What it is: The output from every single transformer layer, but ONLY for the 
-     very last token (word) the model generated before stopping
+     very last token (word) the model generated before stopping.
    * Shape: (num_layers, 1, hidden_dimension)
-   * Expected Size: ~262 KB per image
-   * Best For: Probing the model's internal state exactly when it finishes its thought
+   * Expected Size: ~262 KB per image.
+   * Best For: Probing the model's internal state exactly when it finishes its thought.
 
 3. --scheme last_layer (Medium - Industry Standard)
-   * What it is: The final layer's output for EVERY single token generated in the response
+   * What it is: The final layer's output for EVERY single token generated in the response.
    * Shape: (1, generated_sequence_length, hidden_dimension)
-   * Expected Size: ~4 MB per image
-   * Best For: Token-by-token analysis and understanding the trajectory of the response
+   * Expected Size: ~4 MB per image.
+   * Best For: Token-by-token analysis and understanding the trajectory of the response.
 
 4. --scheme all (Comprehensive Package)
    * What it is: Computes all three of the above metrics and saves them together 
-     as a PyTorch dictionary in a single file.
-   * Structure: {"mean_pooling": tensor, "last_token": tensor, "last_layer": tensor}
-   * Expected Size: ~4.3 MB per image (the combined size of the three)
+     as a PyTorch dictionary in a single file. 
+   * Expected Size: ~4.3 MB per image (the combined size of the three).
    * Best For: Giving yourself total analytical flexibility without needing to 
-     re-run the expensive inference script later
+     re-run the expensive inference script later.
+
+-------------------------------------------------------------------------------
+HOW TO LOAD AND USE SAVED TENSORS:
+
+Because these are saved using PyTorch's native `.pt` format, you do not need 
+a GPU or the original model to analyze them later. You can load them locally.
+
+1. Accessing a specific image:
+   The script names the output file by combining the original image's filename 
+   (minus the extension) with the scheme used. 
+   Example: If the image was `haggis.png` and you ran `--scheme all`, 
+   the resulting file is `haggis_all.pt`.
+
+2. Loading the 'all' configuration:
+   Because the 'all' scheme packages the tensors into a Python dictionary, 
+   you can load the file and instantly access the specific state you want:
+
+   import torch
+
+   # Load the data into CPU memory (weights_only=True is safer for loaded files)
+   data = torch.load("hidden_states/qwen3vl/haggis_all.pt", weights_only=True)
+
+   # Extract the specific tensors
+   mean_pool_tensor = data["mean_pooling"]
+   last_token_tensor = data["last_token"]
+   last_layer_tensor = data["last_layer"]
+
+   print(f"Mean Pool Shape: {mean_pool_tensor.shape}")
 """
 
 import os
