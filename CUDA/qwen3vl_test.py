@@ -134,8 +134,10 @@ if __name__ == "__main__":
                 generated_ids = model.generate(
                     **inputs,
                     max_new_tokens=MAX_NEW_TOKENS,
-                    temperature=TEMPERATURE,
-                    do_sample=DO_SAMPLE,
+                    temperature=TEMPERATURE, # Our default is None (b/c do_sample=False)
+                    do_sample=DO_SAMPLE, # Our default is False (we want deterministic)
+                    top_p=None, # Overwriting Qwen's generation_config.json (otherwise warning 
+                    top_k=None, # due to our "deterministic settings")
                 )
 
             # NOTE: We synchronize again to force Python to wait until the GPU
