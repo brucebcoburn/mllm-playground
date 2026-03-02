@@ -67,7 +67,7 @@ if __name__ == "__main__":
     print(f"Loading model ({QWEN3_VL_ID}) onto {device}...")
     model = Qwen3VLForConditionalGeneration.from_pretrained(
         QWEN3_VL_ID,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         device_map={"": device},
         attn_implementation="flash_attention_2",
     )
