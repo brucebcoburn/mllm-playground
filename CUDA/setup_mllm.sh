@@ -28,7 +28,7 @@ echo "Installing HuggingFace Transformers from bleeding-edge source..."
 pip install git+https://github.com/huggingface/transformers.git
 
 echo "Installing universal routing and tensor utilities (Required for Molmo/LLaMA)..."
-pip install accelerate pillow requests einops
+pip install accelerate pillow requests einops gdown black
 
 echo "Installing standard video/image processing tools..."
 pip install av qwen-vl-utils[decord]==0.0.14
