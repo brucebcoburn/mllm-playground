@@ -112,9 +112,9 @@ if __name__ == "__main__":
 
             # NOTE: Applying the Chat Template
             # MLLMs are trained on highly specific text structures (e.g., <|im_start|>user... vs [INST]...).
-            # `apply_chat_template` takes our readable Python dictionary and automatically translates it 
+            # `apply_chat_template` takes our readable Python dictionary and automatically translates it
             # into the exact raw string format that the specific model expects
-            # `add_generation_prompt=True` appends the final "Assistant:" trigger token so the model 
+            # `add_generation_prompt=True` appends the final "Assistant:" trigger token so the model
             # knows it is its turn to start generating text
             text = processor.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
