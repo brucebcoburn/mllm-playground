@@ -25,6 +25,7 @@ mllm-playground/
 ├── Slurm/                  # Batch scripts and setups for Supercomputer clusters
 │   └── run_qwen3vl.slurm
 └── test_images/            # Auto-generated directory for inference testing
+```
 
 ## 🛠️ Future Development & File Structure Guide
 
