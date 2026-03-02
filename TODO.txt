@@ -3,3 +3,6 @@ Ramblings regarding what needs to be done next:
 + General setup (cluster, Mac)
 + Qwen3 (cluster, Mac)
     - Multi-input, clearing cache in between?
++ GLM4.6V-Flash
++ Gemma3 12B-it
++ InternVL3.5-8B
