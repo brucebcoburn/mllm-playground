@@ -33,7 +33,7 @@ echo "Installing HuggingFace Transformers from bleeding-edge source..."
 pip install --upgrade git+https://github.com/huggingface/transformers.git
 
 echo "Installing universal routing and tensor utilities..."
-pip install --upgrade accelerate pillow requests einops gdown black tqdm
+pip install --upgrade accelerate pillow requests einops gdown black tqdm pipreqs
 
 echo "Installing standard video/image processing tools..."
 pip install --upgrade av qwen-vl-utils[decord]==0.0.14
