@@ -178,7 +178,7 @@ if __name__ == "__main__":
             pbar.set_postfix({"speed": f"{tokens_per_sec:.1f} t/s"})
 
             # NOTE: VRAM Management
-            # We delete the Python references to allow PyTorch's caching allocator 
+            # We delete the Python references to allow PyTorch's caching allocator
             # to instantly reuse these blocks of VRAM for the next image.
             del inputs, generated_ids, new_tokens, image
 
