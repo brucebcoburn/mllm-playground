@@ -31,7 +31,7 @@ echo "Installing Pinned Transformers (4.48.2)..."
 pip install transformers==4.48.2
 
 echo "Installing universal routing and tensor utilities..."
-pip install accelerate pillow requests einops gdown black tqdm tiktoken
+pip install accelerate pillow requests einops gdown black tqdm tiktoken pipreqs pandas
 
 echo "Installing standard video/image processing tools..."
 pip install av qwen-vl-utils[decord]==0.0.14
